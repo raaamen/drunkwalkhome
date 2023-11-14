@@ -12,14 +12,12 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
 {
     //unity action
 
-    public List<Conversation> storyBeat1Dialogue;
-
     public Queue<string> sentences;
     public GameObject textUIElements;
     public TextMeshProUGUI textBox;
     public TextMeshProUGUI nameBox;
-    //public TextMeshProUGUI onScreenTextBox;
-    //public Conversation conversationObj;
+    public TextMeshProUGUI onScreenTextBox;
+    public Conversation conversationObj;
     public bool dialogueOccuring;
     public float textOffset;
     public AudioClip textSFX;
@@ -41,12 +39,6 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
     void Update()
     {
         
-    }
-
-    
-
-    void PrintSentence(){
-
     }
 
     void Awake() {
@@ -105,10 +97,13 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
         Debug.Log("dialogue ended");
         textUIElements.SetActive(false);
         //trigger event if there is one to be triggered
+        /*
+        
         if (string.IsNullOrWhiteSpace(currentConvo.eventTriggeredOnEnd))
         {
             return;
         }
+        */
         //Debug.Log("invoking event: "+currentConvo.eventTriggeredOnEnd);
         //EventManager.TriggerEvent(currentConvo.eventTriggeredOnEnd);
     }
