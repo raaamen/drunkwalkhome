@@ -29,17 +29,6 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
 
     public DisplayObject dialogueBox;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void Awake() {
         sentences = new Queue<string>();
@@ -133,7 +122,7 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
         currentSentence="";
         tempsentence = "";
         dialogueOccuring=false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
         AdvanceDialogue();
         yield return null;
     }
