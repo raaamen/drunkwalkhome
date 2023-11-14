@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestConversation
   m_EditorClassIdentifier: 
   conversationName: Test Conversation
-  participants: 
-  description: 
-  textFile: {fileID: 0}
+  participants: scrungle
+  description: scrungle
+  textFile: {fileID: 4900000, guid: b9979c9b177734d008ea73a710250b45, type: 3}
   eventTriggeredOnEnd: 
