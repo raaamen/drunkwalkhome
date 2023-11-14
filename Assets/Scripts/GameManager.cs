@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    public int health;
+
     public Conversation testconvo;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         //DialogueBoxManager.Instance.StartDialogue(testconvo);
     }
 
