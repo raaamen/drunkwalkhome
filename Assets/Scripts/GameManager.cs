@@ -10,7 +10,6 @@ public class GameManager : Singleton<GameManager>
     public int health;
     public bool home;
     public DisplayObject interactBox;
-
     public Conversation testconvo;
 
     // Start is called before the first frame update
@@ -22,9 +21,11 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.C)){
             DialogueBoxManager.Instance.StartDialogue(testconvo);
         }
+        */
     }
     public void LoadScene(string sceneName){
         SceneManager.LoadScene(sceneName);
