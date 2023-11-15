@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.C)){
+            DialogueBoxManager.Instance.StartDialogue(testconvo);
+        }
     }
     public void LoadScene(string sceneName){
         SceneManager.LoadScene(sceneName);
