@@ -9,6 +9,7 @@ public class TriggerScript : MonoBehaviour
 {
     public bool isInteractable;
     public UnityEvent colliderEvent;
+    public bool canInteract;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,12 @@ public class TriggerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E) && canInteract){
+                //do wahtever we set in the inspector
+                Debug.Log("Interact");
+                GameManager.Instance.interactBox.SetActive(false);
+                colliderEvent.Invoke();
+            }
     }
     
 
@@ -34,11 +40,7 @@ public class TriggerScript : MonoBehaviour
         //if the object can be interacted with
         if (isInteractable && other.gameObject.tag=="Player"){
             Debug.Log("Colliding with player");
-            if (Input.GetKeyDown(KeyCode.E)){
-                //do wahtever we set in the inspector
-                GameManager.Instance.interactBox.SetActive(false);
-                colliderEvent.Invoke();
-            }
+            canInteract=true;
             
         }
           
@@ -47,6 +49,7 @@ public class TriggerScript : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         GameManager.Instance.interactBox.SetActive(false);
+        canInteract=false;
     }
 
 
