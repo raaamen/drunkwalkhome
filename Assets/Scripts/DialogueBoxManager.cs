@@ -27,7 +27,6 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
     public Conversation currentConvo;
     
 
-    public DisplayObject dialogueBox;
 
 
     void Awake() {
