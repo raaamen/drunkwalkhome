@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pixelplacement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
 
     public int health;
+    public bool home;
+    public DisplayObject interactBox;
 
     public Conversation testconvo;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        //DialogueBoxManager.Instance.StartDialogue(testconvo);
+
     }
 
     // Update is called once per frame
@@ -27,4 +29,17 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName){
         SceneManager.LoadScene(sceneName);
     }
+
+
+    public void EndGame(){
+        if (health == 0){
+            //die
+        }
+        else if (home){
+            //home
+        }
+        else return;
+    }
+
+    
 }
