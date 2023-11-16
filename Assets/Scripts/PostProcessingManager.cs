@@ -29,7 +29,7 @@ public class PostProcessingManager : Singleton<PostProcessingManager>
     
     void Start()
     {
-        
+        StartCoroutine("ProcessingFX");
     }
 
     // Update is called once per frame
@@ -38,10 +38,9 @@ public class PostProcessingManager : Singleton<PostProcessingManager>
         
     }
 
-    public IEnumerator ProcessingFX(){
+    public void ProcessingFX(){
         while (GameManager.Instance.gameRunning){
             vignette.intensity.Override(Mathf.Sin(distortionVal*Time.time));
         }
-        yield return null;
     }
 }
