@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     public DisplayObject interactBox;
     public Conversation testconvo;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
