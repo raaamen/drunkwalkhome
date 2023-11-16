@@ -11,6 +11,7 @@ using System.Linq;
 public class DialogueBoxManager : Singleton<DialogueBoxManager>
 {
     //unity action
+    public List<Character> characters;
 
     public Queue<string> sentences;
     public GameObject textUIElements;
@@ -29,8 +30,11 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
     public DisplayObject dialogueChoice1;
     public DisplayObject dialogueChoice2;
 
+    public Image characterPortrait;
+
     public bool dialogueChoice;
     
+    public Character currentCharacterTalking;
 
 
     public void SetDialogueChoice(bool val){
@@ -81,7 +85,40 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
         {
             Debug.Log("Name encountered");
             //set audio clip
-            nameBox.text = currentSentence.Substring(1);
+            
+            //character portrait work here
+        
+            foreach (var item in characters)
+            {
+                if (item.name == currentSentence.Substring(1)){
+                    textBox.text = item.characterName;
+                    characterPortrait.sprite = item.neutral;
+                }
+            }
+            
+            Debug.Log(currentSentence.Substring(1, 6));
+            if (currentSentence.Substring(1, 6)=="Player"){
+                
+                currentCharacterTalking = characters[0];
+                nameBox.text = currentCharacterTalking.name;
+                switch (currentSentence.Substring(1))
+                {
+                    case "Player-Happy":
+                        characterPortrait.sprite = currentCharacterTalking.happy;
+                        break;
+                    case "Player-Pigeon":
+                        characterPortrait.sprite = currentCharacterTalking.sparkle;
+                        break;
+                    case "Player-Neutral":
+                        characterPortrait.sprite = currentCharacterTalking.neutral;
+                        break;
+                    case "Player-Confused":
+                        characterPortrait.sprite = currentCharacterTalking.confused;
+                        break;
+                }
+            }
+            
+
             //not functioning PrintDictionary(charVoices);
             //Debug.Log(charVoices.ContainsKey(nameBox.text));
             //audioSource.clip = charVoices[nameBox.text];

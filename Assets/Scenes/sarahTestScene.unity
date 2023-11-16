@@ -1026,6 +1026,8 @@ GameObject:
   - component: {fileID: 1156810965}
   - component: {fileID: 1156810968}
   - component: {fileID: 1156810969}
+  - component: {fileID: 1156810971}
+  - component: {fileID: 1156810970}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1202,6 +1204,32 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 005154eeb33e24d54b77369cfc8f7fe9, type: 2}
+--- !u!114 &1156810970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156810961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55938fb1577dd4ad3af7e994048c86f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1156810971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156810961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd198189d1ce4d42b766c2012de5944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 0
+  volumeProfile: {fileID: 0}
 --- !u!1 &1631271518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1289,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -2036,6 +2064,7 @@ MonoBehaviour:
   home: 0
   interactBox: {fileID: 347099949}
   testconvo: {fileID: 11400000, guid: 1953a28082d8d44fb9a64f178ae956fd, type: 2}
+  gameRunning: 0
 --- !u!1 &5350062283948729884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,6 +2280,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
+  characters:
+  - {fileID: 11400000, guid: e6a9765c8d36a43329c46fd4ff2a573a, type: 2}
+  - {fileID: 11400000, guid: 92aba06fa0af4498ea13cb791a70eaa5, type: 2}
   textUIElements: {fileID: 6512270758633803160}
   textBox: {fileID: 7602773778312043037}
   nameBox: {fileID: 8285702984945055778}
@@ -2264,7 +2296,9 @@ MonoBehaviour:
   currentConvo: {fileID: 0}
   dialogueChoice1: {fileID: 1929704138}
   dialogueChoice2: {fileID: 1796596161}
+  characterPortrait: {fileID: 9029443166713350061}
   dialogueChoice: 0
+  currentCharacterTalking: {fileID: 0}
 --- !u!114 &8285702984945055778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,7 +2439,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 83ba455b35adc4dc983ef6276b5c6f21, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 427f48a93a8f545a29806b859cc297da, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

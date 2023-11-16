@@ -12,12 +12,14 @@ public class GameManager : Singleton<GameManager>
     public DisplayObject interactBox;
     public Conversation testconvo;
 
+    public bool gameRunning;
+
     
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameRunning=true;
     }
 
     // Update is called once per frame
