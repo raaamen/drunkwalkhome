@@ -11,6 +11,8 @@ using System.Linq;
 public class DialogueBoxManager : Singleton<DialogueBoxManager>
 {
     //unity action
+    public bool conversationOccuring;
+    
     public List<Character> characters;
 
     public Queue<string> sentences;
@@ -54,6 +56,7 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
     }
     //take in textasset from scriptableobject and turn it into queue
     public void StartDialogue(Conversation convoObj){
+        conversationOccuring = true;
         Debug.Log("starting dialogue: "+convoObj.conversationName);
         currentDialogueName = convoObj.conversationName;
         ReadTextFile(convoObj.textFile);
@@ -74,7 +77,7 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
     public void WriteDialogue(){
         
         string currentSentence = sentences.Peek();
-        string textBeforeChoice;
+        
         if (string.IsNullOrEmpty(currentSentence) || string.IsNullOrWhiteSpace(currentSentence))
         {
             EndDialogue();
@@ -164,6 +167,7 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
         dialogueOccuring=false;
         Debug.Log("dialogue ended");
         textUIElements.SetActive(false);
+        conversationOccuring = false;
         //trigger event if there is one to be triggered
         /*
         

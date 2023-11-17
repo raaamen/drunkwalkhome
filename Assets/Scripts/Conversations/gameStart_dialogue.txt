@@ -1,0 +1,18 @@
+#Dialogue should trigger on game start, on a black screen
+$Player_Happy
+I could take one more shot!
+I'm literally built different!
+What's the worst that could happen?
+$Narration
+...
+You are now under the drunk status effect!
+
+#Screen should fade in and show player outside bar
+$Player_Neutral
+...
+God, I am DRUNK.
+...
+Where am I?
+What time is it?
+...
+I. Need to go home.

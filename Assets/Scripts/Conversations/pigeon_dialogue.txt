@@ -1,0 +1,37 @@
+#If player has no bread
+$Player_Neutral
+...
+$Pigeon
+...
+$Player_Happy
+Hey there buddy.
+$Pigeon
+...
+coo. (hello)
+$Player_Pigeon
+...
+You Will Be Mine.
+$Pigeon
+...
+coo. (no)
+$Player_Neutral
+Everybody has a price.
+$Player_Happy
+I just need to find what yours is.
+$Pigeon
+...
+coo. (okay)
+
+#If player has bread
+$Player_Happy
+Hey buddy!
+$Pigeon
+coo. (?)
+Look what I have!
+Bread!
+$Pigeon
+...
+coo! (fuck yeah)
+$Narration
+Pigeon is added to your to your inventory.
+#Remove Pigeon character from screen

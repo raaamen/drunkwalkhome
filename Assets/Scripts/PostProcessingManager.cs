@@ -23,13 +23,14 @@ public class PostProcessingManager : Singleton<PostProcessingManager>
         if(!volumeProfile.TryGet(out chromaticAberration)) throw new System.NullReferenceException(nameof(chromaticAberration));
         if(!volumeProfile.TryGet(out lensDistortion)) throw new System.NullReferenceException(nameof(lensDistortion));
 
+        StartCoroutine("ProcessingFX");
         //not needed
         //if(!volumeProfile) throw new System.NullReferenceException(nameof(UnityEngine.Rendering.VolumeProfile));
     }
     
     void Start()
     {
-        StartCoroutine("ProcessingFX");
+        
     }
 
     // Update is called once per frame
@@ -38,9 +39,14 @@ public class PostProcessingManager : Singleton<PostProcessingManager>
         
     }
 
-    public void ProcessingFX(){
+    public IEnumerator ProcessingFX(){
         while (GameManager.Instance.gameRunning){
+            Debug.Log("Game running");
             vignette.intensity.Override(Mathf.Sin(distortionVal*Time.time));
+            
+
+
         }
+        yield return null;
     }
 }
