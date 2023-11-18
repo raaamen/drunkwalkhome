@@ -106,16 +106,16 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
                 nameBox.text = currentCharacterTalking.name;
                 switch (currentSentence.Substring(1))
                 {
-                    case "Player-Happy":
+                    case "Player_Happy":
                         characterPortrait.sprite = currentCharacterTalking.happy;
                         break;
-                    case "Player-Pigeon":
+                    case "Player_Pigeon":
                         characterPortrait.sprite = currentCharacterTalking.sparkle;
                         break;
-                    case "Player-Neutral":
+                    case "Player_Neutral":
                         characterPortrait.sprite = currentCharacterTalking.neutral;
                         break;
-                    case "Player-Confused":
+                    case "Player_Confused":
                         characterPortrait.sprite = currentCharacterTalking.confused;
                         break;
                 }
