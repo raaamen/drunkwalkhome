@@ -1,0 +1,18 @@
+#Dialogue triggers when buying and drinking more alcohol
+$Player_Neutral
+...
+$Player_Happy
+I could drink more!
+
+#Brief black screen
+
+$Player_Happy
+Woooooooo!!!!!
+
+#Only show the next part in addition to the previous dialogue if player has gone to both liquor stores
+$Player_Happy
+...
+$Player_Neutral
+...
+Man I gotta piss now, I did NOT think this through.
+Maybe the 

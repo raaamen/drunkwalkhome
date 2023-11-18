@@ -11,6 +11,9 @@ using System.Linq;
 public class DialogueBoxManager : Singleton<DialogueBoxManager>
 {
     //unity action
+    public bool conversationOccuring;
+    
+    public List<Character> characters;
 
     public Queue<string> sentences;
     public GameObject textUIElements;
@@ -26,9 +29,20 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
 
     public Conversation currentConvo;
     
+    public DisplayObject dialogueChoice1;
+    public DisplayObject dialogueChoice2;
+
+    public Image characterPortrait;
+
+    public bool dialogueChoice;
+    
+    public Character currentCharacterTalking;
 
 
-
+    public void SetDialogueChoice(bool val){
+        dialogueChoice=val;
+    }
+    
     void Awake() {
         sentences = new Queue<string>();
     //this is not functioning at the moment
@@ -42,6 +56,7 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
     }
     //take in textasset from scriptableobject and turn it into queue
     public void StartDialogue(Conversation convoObj){
+        conversationOccuring = true;
         Debug.Log("starting dialogue: "+convoObj.conversationName);
         currentDialogueName = convoObj.conversationName;
         ReadTextFile(convoObj.textFile);
@@ -62,21 +77,89 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
     public void WriteDialogue(){
         
         string currentSentence = sentences.Peek();
+        
         if (string.IsNullOrEmpty(currentSentence) || string.IsNullOrWhiteSpace(currentSentence))
         {
             EndDialogue();
             return;
         }
-        else if (currentSentence[0] == '$')
+        
+        if (currentSentence[0] == '$')
         {
+            Debug.Log("Name encountered");
             //set audio clip
-            nameBox.text = currentSentence.Substring(1);
+            
+            //character portrait work here
+        
+            foreach (var item in characters)
+            {
+                if (item.name == currentSentence.Substring(1)){
+                    textBox.text = item.characterName;
+                    characterPortrait.sprite = item.neutral;
+                }
+            }
+            
+            Debug.Log(currentSentence.Substring(1, 6));
+            if (currentSentence.Substring(1, 6)=="Player"){
+                
+                currentCharacterTalking = characters[0];
+                nameBox.text = currentCharacterTalking.name;
+                switch (currentSentence.Substring(1))
+                {
+                    case "Player_Happy":
+                        characterPortrait.sprite = currentCharacterTalking.happy;
+                        break;
+                    case "Player_Pigeon":
+                        characterPortrait.sprite = currentCharacterTalking.sparkle;
+                        break;
+                    case "Player_Neutral":
+                        characterPortrait.sprite = currentCharacterTalking.neutral;
+                        break;
+                    case "Player_Confused":
+                        characterPortrait.sprite = currentCharacterTalking.confused;
+                        break;
+                }
+            }
+            
+
             //not functioning PrintDictionary(charVoices);
             //Debug.Log(charVoices.ContainsKey(nameBox.text));
             //audioSource.clip = charVoices[nameBox.text];
+            
+            sentences.Dequeue();
+            currentSentence=sentences.Peek();
+        }
+
+        if (currentSentence.Substring(0,2) == "#1"){
+            //display choice 
+            
+            Debug.Log("Choice 1 encountered");
+            dialogueChoice=true;
+            dialogueChoice1.gameObject.GetComponentInChildren<TMP_Text>().text = currentSentence.Substring(2);
+            //WriteDialogue();
+            sentences.Dequeue();
+            currentSentence=sentences.Peek();
+            Debug.Log(currentSentence + " is the next sentence");
+            //sentences.Dequeue();
+            //currentSentence=sentences.Peek();
+            
+        }
+        if (currentSentence.Substring(0,2)=="#2"){
+            Debug.Log("Choice 2 encountered");
+            dialogueChoice2.gameObject.GetComponentInChildren<TMP_Text>().text = currentSentence.Substring(2);
+            sentences.Dequeue();
+            //currentSentence=sentences.Peek();
+        }
+        StartCoroutine(PrintOneByOne(currentSentence));
+        /*
+        if (currentSentence.Substring(0,2) == "#2"){
+            //display choice
+            dialogueChoice=true;
+            dialogueChoice2.gameObject.GetComponentInChildren<TMP_Text>().text = currentSentence.Substring(2);
             sentences.Dequeue();
         }
-        StartCoroutine(PrintOneByOne(sentences.Peek()));
+        */
+        
     }
     public void EndDialogue(){
         //clear queue
@@ -84,6 +167,7 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
         dialogueOccuring=false;
         Debug.Log("dialogue ended");
         textUIElements.SetActive(false);
+        conversationOccuring = false;
         //trigger event if there is one to be triggered
         /*
         
@@ -121,9 +205,31 @@ public class DialogueBoxManager : Singleton<DialogueBoxManager>
         currentSentence="";
         tempsentence = "";
         dialogueOccuring=false;
+        if (dialogueChoice){
+            Debug.Log("Dialogue choice visible");
+            dialogueChoice1.SetActive(true);
+            dialogueChoice2.SetActive(true);
+            yield return new WaitUntil(()=> dialogueChoice=false);
+            
+        }
+        else {
+
         yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
         AdvanceDialogue();
+        }
         yield return null;
+    }
+
+    public void Choice1Clicked(){
+        WriteDialogue();
+        sentences.Dequeue();
+    }
+    public void Choice2Clicked(){
+        //dequeues choice 1
+        //sentences.Dequeue();
+        //AdvanceDialogue();
+        sentences.Dequeue();
+        WriteDialogue();
     }
 
     private void FixedUpdate() {
